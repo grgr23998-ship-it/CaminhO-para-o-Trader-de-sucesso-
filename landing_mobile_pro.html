@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tornar-se um Trader de Sucesso – Landing Mobile</title>
+  <meta name="description" content="Guia prático para operar o NAS100 com consistência: gestão de risco, setups e mentalidade do trader.">
+  <style>
+    :root{
+      --brand:#22c55e; --brand2:#38bdf8; --bg:#0b1220; --card:#0f172a; --text:#e2e8f0; --muted:#94a3b8;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand img{height:34px;width:auto;border-radius:8px}
+    .cta-nav{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#0f172a;font-weight:800;padding:10px 14px;border-radius:12px;text-decoration:none;box-shadow:0 10px 24px rgba(2,6,23,.35)}
+
+    /* HERO */
+    header.hero{position:relative;overflow:hidden}
+    .hero-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center;padding:92px 0 60px}
+    .hero h1{font-size:clamp(28px,6vw,44px);line-height:1.06;margin:0 0 10px;font-weight:900}
+    .sub{color:#cbd5e1;font-size:clamp(15px,2.6vw,18px)}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;color:#cbd5e1}
+    .badge{display:flex;align-items:center;gap:6px;font-size:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:8px 10px;border-radius:12px}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#0b1220;font-weight:800;padding:12px 18px;border-radius:14px;text-decoration:none;box-shadow:0 14px 34px rgba(2,6,23,.45)}
+    .btn-ghost{border:1px solid rgba(255,255,255,.18);padding:12px 18px;border-radius:14px;text-decoration:none;color:var(--text)}
+    .countdown{margin-top:8px;font-size:16px;color:#fbbf24;font-weight:700}
+
+    /* hero background effects */
+    .hero:before{content:"";position:absolute;inset:0;background:
+      radial-gradient(900px 420px at 10% -10%, rgba(56,189,248,.25), transparent),
+      radial-gradient(700px 420px at 90% 10%, rgba(34,197,94,.18), transparent),
+      linear-gradient(180deg,#0b1220 0%, #0f172a 100%);
+      z-index:-3}
+    .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:26px 26px;z-index:-2}
+    .glow{position:absolute;filter:blur(48px);opacity:.4;border-radius:9999px;z-index:-1;animation:float 12s ease-in-out infinite alternate}
+    .glow-1{width:320px;height:320px;background:#22c55e;top:-60px;right:-60px}
+    .glow-2{width:220px;height:220px;background:#38bdf8;bottom:-40px;left:-40px;animation-delay:1.2s}
+    @keyframes float{to{transform:translateY(24px) translateX(16px);opacity:.55}}
+
+    /* watermark NAS100 */
+    .watermark{position:absolute;inset:0;pointer-events:none}
+    .watermark::after{content:"NAS100";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-12deg);font-size:18vw;font-weight:900;letter-spacing:.06em;color:#fff;opacity:.03;}
+
+    /* cover mock */
+    .cover-card{position:relative;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(2,6,23,.45)}
+    .cover{display:block;width:100%;height:auto}
+    .nas100-chip{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:9999px;font-size:12px}
+
+    /* sections */
+    section{padding:46px 0}
+    h2{font-size:clamp(22px,5vw,32px);margin:0 0 14px;font-weight:900;color:#eafff5}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:16px}
+    .muted{color:var(--muted)}
+
+    .test-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .test{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:16px}
+
+    .offer{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:center}
+    .box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:18px;border-radius:16px}
+    .price{display:flex;align-items:flex-end;gap:12px;margin-top:8px}
+    .price .was{color:#94a3b8;text-decoration:line-through}
+    .price .now{font-size:34px;font-weight:900}
+
+    /* floating cta */
+    .float-cta{position:fixed;right:14px;bottom:14px;background:linear-gradient(90deg,var(--brand),var(--brand2));color:#0b1220;font-weight:900;padding:12px 16px;border-radius:14px;text-decoration:none;box-shadow:0 16px 38px rgba(2,6,23,.5);z-index:60}
+
+    /* footer */
+    footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0;color:#94a3b8;text-align:center}
+
+    /* scroll reveal */
+    .reveal{opacity:0;transform:translateY(20px);transition:all .7s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    /* responsive */
+    @media (max-width: 980px){
+      .hero-wrap{grid-template-columns:1fr}
+      .offer{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .test-wrap{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand reveal">
+        <img src="https://i.ibb.co/WfWv1Xz/Tornar-se-um-Trader-de-Sucesso.png" alt="Logo eBook">
+        <span>Tornar-se um Trader de Sucesso</span>
+      </div>
+      <a class="cta-nav" href="#checkout">Quero o eBook</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="grid-bg"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="watermark"></div>
+
+    <div class="container hero-wrap">
+      <div class="reveal">
+        <h1>Tornar-se um <span style="color:var(--brand)">Trader de Sucesso</span></h1>
+        <p class="sub">Estratégias práticas, gestão de risco e mentalidade vencedora para operar índices — com foco no <strong>NAS100</strong>.</p>
+        <div class="badges">
+          <div class="badge">⚡ Acesso imediato</div>
+          <div class="badge">🔒 Pagamento seguro</div>
+          <div class="badge">📈 Atualizado para NAS100</div>
+          <div class="badge">✅ Garantia 7 dias</div>
+        </div>
+        <div class="cta-row">
+          <a class="btn-primary" href="https://pay.kirvano.com/16314fc5-2278-45f2-aebf-9a4b46667811" target="_blank" rel="noopener">Adquirir agora</a>
+          <a class="btn-ghost" href="#conteudo">Ver conteúdo</a>
+        </div>
+        <div class="countdown">Oferta especial termina em: <span id="timer">--</span></div>
+      </div>
+
+      <div class="cover-card reveal">
+        <a href="https://i.ibb.co/WfWv1Xz/Tornar-se-um-Trader-de-Sucesso.png" target="_blank" rel="noopener">
+          <img class="cover" src="https://i.ibb.co/WfWv1Xz/Tornar-se-um-Trader-de-Sucesso.png" alt="Capa oficial do eBook">
+        </a>
+        <div class="nas100-chip">NAS100 • eBook</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <section id="conteudo">
+    <div class="container">
+      <h2 class="reveal">O que você vai aprender</h2>
+      <div class="cards">
+        <div class="card reveal"><strong>Fundamentos sem complicação</strong><br>Mercado, ativos, horários e leitura de gráfico.</div>
+        <div class="card reveal"><strong>Gestão de risco na prática</strong><br>Regras para proteger capital e crescer com consistência.</div>
+        <div class="card reveal"><strong>Entradas objetivas</strong><br>Setups testados, exemplos comentados e checklist.</div>
+      </div>
+
+      <div class="cards" style="margin-top:14px">
+        <div class="card reveal"><strong>Plano de evolução</strong><br>Do zero ao consistente com metas realistas.</div>
+        <div class="card reveal"><strong>Psicologia do trader</strong><br>Disciplina, controle emocional e execução.</div>
+        <div class="card reveal"><strong>Foco em índices (NAS100)</strong><br>Adaptação às características do índice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section>
+    <div class="container">
+      <h2 class="reveal">Depoimentos de quem já comprou</h2>
+      <div class="test-wrap">
+        <div class="test reveal">“Segui o plano do eBook e parei de devolver lucro. Hoje opero com confiança.”<br><span class="muted">— Marina S.</span></div>
+        <div class="test reveal">“A gestão de risco mudou meu jogo. Consistência veio em poucas semanas.”<br><span class="muted">— Rafael T.</span></div>
+        <div class="test reveal">“Conteúdo direto, prático e aplicável ao NAS100. Valeu cada centavo.”<br><span class="muted">— Daniel A.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section id="checkout">
+    <div class="container offer">
+      <div class="reveal">
+        <h2>Oferta de Lançamento</h2>
+        <p class="muted">Acesso vitalício + atualizações futuras + materiais bônus.</p>
+        <div class="price">
+          <div class="was">R$ 197</div>
+          <div class="now">R$ 97</div>
+        </div>
+        <ul style="margin:12px 0 0 18px" class="muted">
+          <li>eBook completo (PDF)</li>
+          <li>Planilha Risk/Reward + Diário de Trade</li>
+          <li>Glossário e Checklist pré-operação</li>
+          <li>Garantia incondicional de 7 dias</li>
+        </ul>
+        <div class="cta-row" style="margin-top:16px">
+          <a class="btn-primary" href="https://pay.kirvano.com/16314fc5-2278-45f2-aebf-9a4b46667811" target="_blank">Quero garantir meu acesso</a>
+          <a class="btn-ghost" href="https://i.ibb.co/WfWv1Xz/Tornar-se-um-Trader-de-Sucesso.png" target="_blank">Ver capa em alta</a>
+        </div>
+        <div style="margin-top:10px" class="muted">Pagamento 100% seguro • Acesso imediato após a confirmação</div>
+      </div>
+
+      <div class="box reveal">
+        <strong>Garantia 7 Dias</strong>
+        <p class="muted" style="margin-top:8px">Se o eBook não agregar valor, você tem 7 dias para solicitar reembolso. Risco zero para você.</p>
+        <div class="muted" style="margin-top:8px;font-size:14px">Formato: PDF • Nível: Iniciante a Intermediário • Foco: NAS100</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Tornar-se um Trader de Sucesso. Todos os direitos reservados.</div>
+      <div style="margin-top:8px;font-size:12px">Material educativo. Operações no mercado envolvem risco. Nunca invista valores que não possa perder.</div>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <a class="float-cta" href="https://pay.kirvano.com/16314fc5-2278-45f2-aebf-9a4b46667811" target="_blank">Comprar agora</a>
+
+  <script>
+    // Ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contagem regressiva de 2 meses
+    (function(){
+      const end = new Date(); end.setMonth(end.getMonth()+2);
+      const el = document.getElementById('timer');
+      function tick(){
+        const now = new Date();
+        const diff = end - now;
+        if(diff <= 0){ el.textContent = 'Expirado'; return; }
+        const d = Math.floor(diff/(1000*60*60*24));
+        const h = Math.floor((diff/(1000*60*60))%24);
+        const m = Math.floor((diff/(1000*60))%60);
+        const s = Math.floor((diff/1000)%60);
+        el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      tick(); setInterval(tick,1000);
+    })();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
